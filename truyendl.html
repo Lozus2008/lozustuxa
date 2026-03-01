@@ -20,15 +20,15 @@
 <body>
 
 <div class="card">
-    <h2>Cloud Phone Tool</h2>
+    <h2>Gửi đến vũ</h2>
     
-    <label for="phone">Số điện thoại / Device ID:</label>
-    <input type="text" id="phone" placeholder="Ví dụ: 0987654321">
+    <label for="phone">Độ con bố/mẹ :</label>
+    <input type="text" id="phone" placeholder="Ví dụ: Độ con mẹ : Lý">
 
-    <label for="message">Nội dung tin nhắn:</label>
+    <label for="message">Nội dung gọi</label>
     <textarea id="message" placeholder="Nhập nội dung cần gửi..."></textarea>
 
-    <button onclick="sendToDiscord()" id="btnSend">GỬI LỆNH NGAY</button>
+    <button onclick="sendToDiscord()" id="btnSend">Gọi ngay</button>
     <div id="statusMsg" class="status"></div>
 </div>
 
@@ -57,16 +57,16 @@
 
         // Cấu trúc dữ liệu gửi lên Discord
         const payload = {
-            username: "Hệ Thống Cloud Phone",
-            avatar_url: "https://i.imgur.com/4M34ogt.png", // Icon tùy chỉnh
+            username: "alo vũ à vũ!",
+            avatar_url: "https://khoanhdep.com/wp-content/uploads/2026/02/meme-anh-do-mixi-2.jpg", // Icon tùy chỉnh
             embeds: [{
                 title: "🚀 Lệnh gửi tin nhắn mới",
                 color: 3447003, // Màu xanh dương
                 fields: [
-                    { name: "📱 Thiết bị/SĐT", value: `\`${phone}\``, inline: true },
+                    { name: "alo vũ à vũ!", value: `\`"anh Độ con Bố/Mẹ :"${phone}\"đây"``, inline: true },
                     { name: "💬 Nội dung", value: message }
                 ],
-                footer: { text: "Gửi từ Web Tool Custom" },
+                footer: { text: "Gửi từ anh Ộ i i" },
                 timestamp: new Date()
             }]
         };
@@ -98,4 +98,5 @@
 </script>
 
 </body>
+
 </html>
