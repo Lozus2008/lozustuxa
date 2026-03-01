@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Phone Control Panel</title>
+    <style>
+        /* CSS để làm giao diện giống trang gốc */
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+        h2 { color: #333; text-align: center; margin-bottom: 20px; font-size: 1.5rem; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
+        input, textarea { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
+        textarea { height: 100px; resize: none; }
+        button { width: 100%; padding: 12px; border: none; border-radius: 6px; background-color: #007bff; color: white; font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.3s; }
+        button:hover { background-color: #0056b3; }
+        .status { text-align: center; margin-top: 10px; font-size: 13px; display: none; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Cloud Phone Tool</h2>
+    
+    <label for="phone">Số điện thoại / Device ID:</label>
+    <input type="text" id="phone" placeholder="Ví dụ: 0987654321">
+
+    <label for="message">Nội dung tin nhắn:</label>
+    <textarea id="message" placeholder="Nhập nội dung cần gửi..."></textarea>
+
+    <button onclick="sendToDiscord()" id="btnSend">GỬI LỆNH NGAY</button>
+    <div id="statusMsg" class="status"></div>
+</div>
+
+<script>
+    async function sendToDiscord() {
+        // === 1. THAY LINK WEBHOOK CỦA BẠN VÀO ĐÂY ===
+        const WEBHOOK_URL = "https://discord.com/api/webhooks/1477755265440026756/va_JIKGR6Km-SDZBfh5A-Cvg4SRj5dRVUL-094z1CKXK_TdrlVuHhEPVvV-8b5X-iSBg";
+
+        const phone = document.getElementById('phone').value;
+        const message = document.getElementById('message').value;
+        const btn = document.getElementById('btnSend');
+        const status = document.getElementById('statusMsg');
+
+        // Kiểm tra xem người dùng đã nhập đủ chưa
+        if (!phone || !message) {
+            alert("Vui lòng nhập đầy đủ thông tin!");
+            return;
+        }
+
+        // Vô hiệu hóa nút để tránh bấm nhiều lần
+        btn.disabled = true;
+        btn.innerText = "Đang gửi...";
+        status.style.display = "block";
+        status.innerText = "Đang xử lý dữ liệu...";
+        status.style.color = "#666";
+
+        // Cấu trúc dữ liệu gửi lên Discord
+        const payload = {
+            username: "Hệ Thống Cloud Phone",
+            avatar_url: "https://i.imgur.com/4M34ogt.png", // Icon tùy chỉnh
+            embeds: [{
+                title: "🚀 Lệnh gửi tin nhắn mới",
+                color: 3447003, // Màu xanh dương
+                fields: [
+                    { name: "📱 Thiết bị/SĐT", value: `\`${phone}\``, inline: true },
+                    { name: "💬 Nội dung", value: message }
+                ],
+                footer: { text: "Gửi từ Web Tool Custom" },
+                timestamp: new Date()
+            }]
+        };
+
+        try {
+            const response = await fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+                status.innerText = "✅ Gửi lệnh thành công!";
+                status.style.color = "green";
+                // Xóa nội dung sau khi gửi xong
+                document.getElementById('message').value = "";
+            } else {
+                status.innerText = "❌ Lỗi: Webhook không phản hồi.";
+                status.style.color = "red";
+            }
+        } catch (error) {
+            status.innerText = "❌ Lỗi kết nối mạng!";
+            status.style.color = "red";
+        } finally {
+            btn.disabled = false;
+            btn.innerText = "GỬI LỆNH NGAY";
+        }
+    }
+</script>
+
+</body>
+</html>
