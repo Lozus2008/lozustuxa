@@ -1,7 +1,7 @@
 _G.TekkitConfig = {
   AutoFarm = true,
   AutoReload = true,
-  FarmOptions = {"Open 2nd Chest", "Mastery Farm", "Close GUI", "Auto Execute"},
+  FarmOptions = { "Mastery Farm", "Close GUI"},
   AutoReturn = true,
   ReturnAmount = 5,
   UpgradeGear = true,
@@ -18,7 +18,7 @@ _G.TekkitConfig = {
   AutoStartObjective = "Skirmish",
   AutoStartDifficulty = "Hardest",
   AutoStartModifiers = {"No Perks", "No Skills",  "Nightmare", "Oddball", "Injury Prone", "Chronic Injuries", "Fog", "Glass Cannon", "Time Trial"},
-  UseSkills = true,
+  UseSkills = false,
   EquipSkills = true,
   Skills = {"Drill Thrust", "Torrential Steel", "Let it RIP", "Red Flare", "Black Flare", "Order: Rage", "Rage Mode"},
   AutoSpearQuests = false,
