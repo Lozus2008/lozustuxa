@@ -1,4 +1,5 @@
 _G.TekkitConfig = {
+  NapeExtend = true,
   AutoFarm = true,
   AutoReload = true,
   FarmOptions = { "Mastery Farm", "Close GUI"},
